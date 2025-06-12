@@ -10,22 +10,25 @@ def main():
     utils.setup_logging()
     print("=== ThetaFlow: TSLA Covered Call Strategy ===")
 
-    # Fetch live options chain data for TSLA from yfinance
     options_data = data_fetch.get_options_data("TSLA")
+    selected_calls = strategy.select_low_risk_calls(
+        options_data, 
+        max_contracts=2,  # Based on owning 200 shares
+        target_probability=0.90
+    )
 
-    # Select candidate options for a low-risk covered call strategy.
-    # We consider 'out-of-the-money' options (using a moneyness buffer) and sort by open interest.
-    selected_calls = strategy.select_covered_calls(options_data, moneyness_buffer=1.05)
-
-    # Show the key details of the selected options
     if not selected_calls.empty:
-        print("Selected Covered Call Opportunities:")
-        print(selected_calls[['contractSymbol', 'strike', 'lastPrice', 'impliedVolatility', 'openInterest']])
+        print("\nSelected Covered Call Opportunities:")
+        print("(Filtered for 90% probability OTM, avoiding earnings)")
+        display_cols = [
+            'contractSymbol', 'strike', 'lastPrice', 
+            'prob_profit', 'net_premium', 'expiry'
+        ]
+        print(selected_calls[display_cols].to_string(index=False))
     else:
-        print("No candidate options were found based on the current parameters.")
+        print("No suitable options found matching criteria")
 
-    # Log the event for audit / debugging purposes.
-    utils.log_message("Fetched and processed TSLA options data.")
+    utils.log_message("Strategy execution completed")
 
 
 if __name__ == "__main__":

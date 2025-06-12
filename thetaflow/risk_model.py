@@ -50,3 +50,9 @@ def estimate_delta(price, strike, time_to_expiry, risk_free_rate, implied_volati
 
     except Exception as e:
         raise ValueError(f"Error calculating delta: {str(e)}")
+
+
+def estimate_profit_probability(price, strike, time_to_expiry, risk_free_rate, implied_volatility):
+    """Calculate probability of profit for a covered call"""
+    delta = estimate_delta(price, strike, time_to_expiry, risk_free_rate, implied_volatility)
+    return 1 - delta  # Probability it expires OTM

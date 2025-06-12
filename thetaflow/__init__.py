@@ -18,3 +18,4 @@ from .data_fetch import get_options_data
 from .strategy import select_covered_calls, select_low_risk_calls
 from .risk_model import estimate_delta
 from .utils import setup_logging, log_message
+from .backtest import CoveredCallBacktest 

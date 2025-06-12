@@ -3,29 +3,70 @@ Module: strategy
 Purpose: To define the covered call selection rules.
 """
 
+import pandas as pd
+from datetime import datetime, timedelta
+import yfinance as yf
+from .risk_model import estimate_delta
 
-def select_low_risk_calls(options_df, moneyness_buffer=1.05):
+
+def select_low_risk_calls(options_df, max_contracts=2, target_probability=0.90):
     """
-    Filters call options to select low-risk, out-of-the-money (OTM) candidates for a covered call strategy.
+    Select the safest covered call with specific criteria:
+    - High probability of expiring OTM (90%)
+    - Avoid earnings dates
+    - Limited by number of contracts
+    - Weekly options preferred
 
     Args:
-        options_df (DataFrame): Options chain data (calls).
-        moneyness_buffer (float): Factor above the current price to define OTM (e.g., 1.05 means 5% above the spot price).
-
-    Returns:
-        DataFrame: Top candidate options sorted by open interest.
+        options_df (DataFrame): Options chain data
+        max_contracts (int): Maximum number of contracts (based on shares owned)
+        target_probability (float): Desired probability of profit
     """
-    # Get the current TSLA price
+    # Get current price and next earnings date
+    ticker = yf.Ticker("TSLA")
     current_price = options_df['currentPrice'].iloc[0]
 
-    # Filter for calls whose strike price is higher than the current price * moneyness_buffer
-    filtered = options_df[options_df['strike'] > current_price * moneyness_buffer]
+    try:
+        next_earnings = pd.to_datetime(ticker.calendar.iloc[0]['Earnings Date'])
+        earnings_buffer = timedelta(days=5)  # Avoid options expiring near earnings
+    except:
+        next_earnings = None
 
-    # Sort by open interest (to ensure liquidity) in descending order
-    filtered = filtered.sort_values(by='openInterest', ascending=False)
+    # Filter options
+    filtered = options_df[
+        (options_df['openInterest'] > 1000) &  # Ensure liquidity
+        (options_df['strike'] > current_price)  # OTM calls only
+    ].copy()
 
-    # Return top 5 candidates; you can adjust this as desired.
-    return filtered.head(5)
+    # Calculate probability of profit (1 - delta)
+    filtered['prob_profit'] = filtered.apply(
+        lambda row: 1 - estimate_delta(
+            current_price,
+            row['strike'],
+            (pd.to_datetime(row['expiry']) - pd.Timestamp.now()).days / 365,
+            0.05,  # Risk-free rate
+            row['impliedVolatility']
+        ),
+        axis=1
+    )
+
+    # Avoid earnings dates
+    if next_earnings is not None:
+        filtered = filtered[
+            abs(pd.to_datetime(filtered['expiry']) - next_earnings) > earnings_buffer
+        ]
+
+    # Select options meeting probability target
+    candidates = filtered[
+        (filtered['prob_profit'] >= target_probability)
+    ].sort_values('openInterest', ascending=False)
+
+    # Calculate expected profit after fees
+    fee_per_contract = 0.65
+    candidates['net_premium'] = candidates['lastPrice'] * 100 - fee_per_contract
+
+    # Return best candidate(s) up to max_contracts
+    return candidates.head(max_contracts)
 
 
 # Alias for clarity if you want to extend further risk filtering later
