@@ -3,3 +3,7 @@
 2025-06-11 22:22:29,555 - INFO - Fetched and processed TSLA options data.
 2025-06-11 23:31:04,345 - INFO - Fetched and processed TSLA options data.
 2025-06-11 23:51:28,119 - INFO - Fetched and processed TSLA options data.
+2025-06-12 00:48:59,869 - ERROR - HTTP Error 401: 
+2025-06-12 00:48:59,876 - INFO - Strategy execution completed
+2025-06-12 00:56:39,443 - ERROR - HTTP Error 401: 
+2025-06-12 00:56:39,450 - INFO - Strategy execution completed
