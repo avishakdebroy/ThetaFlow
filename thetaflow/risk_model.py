@@ -1,6 +1,15 @@
 """
 Module: risk_model
 Purpose: Contains functions for calculating risk metrics using Black-Scholes model.
+
+Black-Scholes Model Assumptions:
+1. The stock follows a lognormal random walk (Geometric Brownian Motion)
+2. No dividends are paid during the option's life
+3. Markets are efficient (no arbitrage)
+4. No transaction costs or taxes
+5. Risk-free rate is constant
+6. All securities are perfectly divisible
+7. European-style options (no early exercise)
 """
 
 import numpy as np
