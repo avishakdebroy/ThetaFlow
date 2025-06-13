@@ -5,10 +5,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c138d49f-4982-4472-919a-581b9c1163e5" name="Changes" comment="Backtest now properly tracks trades, handles expirations, and saves results">
-      <change afterPath="$PROJECT_DIR$/docs/tasks.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/ThetaFlow.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ThetaFlow.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/tasks.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/tasks.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/run_logs.txt" beforeDir="false" afterPath="$PROJECT_DIR$/logs/run_logs.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run_backtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/run_backtest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_backtest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_backtest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thetaflow/risk_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/thetaflow/risk_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/thetaflow/strategy.py" beforeDir="false" afterPath="$PROJECT_DIR$/thetaflow/strategy.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +46,7 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Python.main.executor": "Run",
+    "Python.risk_model.executor": "Run",
     "Python.run_backtest.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
@@ -105,6 +111,9 @@
       <workItem from="1749694123626" duration="530000" />
       <workItem from="1749705766799" duration="610000" />
       <workItem from="1749761965135" duration="1891000" />
+      <workItem from="1749782895967" duration="789000" />
+      <workItem from="1749784479021" duration="29000" />
+      <workItem from="1749784515877" duration="1344000" />
     </task>
     <task id="LOCAL-00001" summary="Backtest now properly tracks trades, handles expirations, and saves results">
       <option name="closed" value="true" />
@@ -114,7 +123,15 @@
       <option name="project" value="LOCAL" />
       <updated>1749706007673</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Backtest now properly tracks trades, handles expirations, and saves results">
+      <option name="closed" value="true" />
+      <created>1749782921175</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1749782921175</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -125,7 +142,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>
@@ -136,7 +165,8 @@
     <option name="LAST_COMMIT_MESSAGE" value="Backtest now properly tracks trades, handles expirations, and saves results" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ThetaFlow$run_backtest.coverage" NAME="run_backtest Coverage Results" MODIFIED="1749706368548" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/ThetaFlow$main.coverage" NAME="main Coverage Results" MODIFIED="1749761978700" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ThetaFlow$risk_model.coverage" NAME="risk_model Coverage Results" MODIFIED="1749785631772" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/thetaflow" />
+    <SUITE FILE_PATH="coverage/ThetaFlow$run_backtest.coverage" NAME="run_backtest Coverage Results" MODIFIED="1749785841591" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ThetaFlow$main.coverage" NAME="main Coverage Results" MODIFIED="1749785831387" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

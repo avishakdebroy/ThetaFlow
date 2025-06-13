@@ -26,7 +26,7 @@ This document contains a detailed list of actionable improvement tasks for the T
 
 ## Code Quality Improvements
 
-5. [ ] Fix class inconsistency in backtest module
+5. [x] Fix class inconsistency in backtest module
    - Rename CoveredCallBacktest to ThetaFlowBacktester in tests or vice versa
    - Ensure consistent naming across the codebase
 
